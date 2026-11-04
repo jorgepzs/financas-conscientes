@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Finanças Conscientes</string>
+    <string name="import_csv">Importar extrato CSV</string>
+    <string name="clear_data">Apagar todos os dados</string>
+    <string name="encrypted_data_unreadable">Os dados criptografados não puderam ser lidos.</string>
+    <string name="pending_count">Pendências do extrato (%1$d)</string>
+    <string name="classified_count">Seus registros (%1$d)</string>
+    <string name="set_monthly_budget">Definir orçamento mensal</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Excluir</string>
+    <string name="receipt_instructions">Como compartilhar um comprovante</string>
+    <string name="manual_expense">Novo registro manual</string>
+    <string name="manage_statement">Gerenciar movimentações importadas</string>
+    <string name="remove_from_statement">Apagar do extrato</string>
+    <string name="viewer_opening">Abrindo e autenticando o arquivo cifrado…</string>
+    <string name="viewer_title">Anexo cifrado escolhido por você</string>
+    <string name="close">Fechar</string>
+    <string name="previous_page">‹ Anterior</string>
+    <string name="next_page">Próxima ›</string>
+    <string name="viewer_png_image">Imagem PNG • arquivo anexado pelo usuário</string>
+    <string name="viewer_jpeg_image">Imagem JPEG • arquivo anexado pelo usuário</string>
+    <string name="viewer_webp_image">Imagem WebP • arquivo anexado pelo usuário</string>
+    <plurals name="viewer_pdf_pages">
+        <item quantity="one">PDF • %1$d página</item>
+        <item quantity="other">PDF • %1$d páginas</item>
+    </plurals>
+    <string name="viewer_pdf_page">Página %1$d de %2$d • PDF anexado pelo usuário</string>
+</resources>

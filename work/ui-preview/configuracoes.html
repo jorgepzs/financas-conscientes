@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171b25">
+  <title>Configurações — Finanças Conscientes</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; background: #11141c; color: #f2f4fa; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 22px 12px; background: radial-gradient(ellipse at 50% 0%, #27304a 0, #11141c 62%); }
+    button, input { font: inherit; }
+    button { color: inherit; cursor: pointer; }
+    .phone { position: relative; width: min(100%, 420px); height: min(880px, calc(100vh - 44px)); min-height: 640px; overflow: hidden; display: flex; flex-direction: column; border: 1px solid #394052; border-radius: 34px; background: #171b25; box-shadow: 0 28px 90px #0009; }
+    .status { height: 30px; padding: 8px 22px 0; color: #dce1eb; font-size: 11px; letter-spacing: .02em; display: flex; justify-content: space-between; }
+    header { height: 68px; flex: 0 0 auto; display: flex; align-items: center; gap: 12px; padding: 8px 20px; border-bottom: 1px solid #2b3140; }
+    .menu { width: 42px; height: 42px; border: 1px solid #353c4d; border-radius: 14px; background: #202633; font-size: 20px; }
+    .brand { flex: 1; min-width: 0; }
+    .brand strong { display: block; font-size: 15px; }
+    .brand small { display: block; margin-top: 2px; color: #aeb7c8; font-size: 11px; }
+    .body { flex: 1; overflow: auto; padding: 18px 17px 24px; scrollbar-color: #424b60 transparent; }
+    .eyebrow { margin: 0 0 7px; color: #9baeff; font-size: 10px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: 23px; line-height: 1.18; letter-spacing: -.025em; }
+    .intro { margin: 7px 0 0; color: #aeb7c8; font-size: 12px; line-height: 1.5; }
+    .info { margin: 17px 0 20px; padding: 14px; border: 1px solid #39445f; border-radius: 17px; background: linear-gradient(135deg, #242e49, #202633 70%); }
+    .info strong { display: block; font-size: 13px; }
+    .info p { margin: 5px 0 0; color: #c0c8d8; font-size: 11px; line-height: 1.45; }
+    .section { margin: 20px 0 9px; display: flex; align-items: end; justify-content: space-between; gap: 12px; }
+    .section h2 { margin: 0; font-size: 16px; }
+    .section p { margin: 4px 0 0; color: #aeb7c8; font-size: 11px; line-height: 1.4; }
+    .add { min-height: 43px; width: 100%; margin: 9px 0 2px; border: 1px solid #7188f1; border-radius: 13px; background: #7891ff; color: #10131b; font-weight: 750; font-size: 12px; }
+    .option { margin-top: 8px; padding: 13px; border: 1px solid #333b4d; border-radius: 16px; background: #202633; }
+    .option-top { display: flex; align-items: center; gap: 11px; min-width: 0; }
+    .dot { width: 22px; height: 22px; flex: 0 0 22px; border: 2px solid #596276; border-radius: 50%; background: var(--swatch, #90a4ae); }
+    .option-name { flex: 1; min-width: 0; }
+    .option-name strong { display: block; overflow: hidden; font-size: 13px; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
+    .option-name small { display: block; margin-top: 3px; color: #aeb7c8; font-size: 10px; }
+    .protected { padding: 3px 7px; border-radius: 20px; background: #2b3140; color: #bbc4d3; font-size: 9px; }
+    .actions { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 7px; margin-top: 12px; }
+    .actions button { min-height: 39px; border: 1px solid #41495b; border-radius: 11px; background: #252c3a; color: #dfe4ed; font-size: 11px; font-weight: 650; }
+    .actions button:first-child { color: #b6c2ff; border-color: #485887; }
+    .actions .remove { color: #ff9d96; border-color: #69464d; background: #33262c; }
+    .decision .actions { grid-template-columns: 1fr 1fr; }
+    .note { margin: 14px 2px 4px; color: #9ea8bb; font-size: 10px; line-height: 1.5; }
+    .bottom { flex: 0 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); padding: 8px 10px 12px; border-top: 1px solid #333b4d; background: #202633; }
+    .bottom button { height: 46px; border: 0; border-radius: 13px; background: transparent; color: #aeb7c8; font-size: 10px; font-weight: 650; }
+    .bottom button span { display: block; margin-bottom: 2px; font-size: 16px; }
+    .bottom button.active { background: #7891ff; color: #10131b; }
+    .drawer-scrim, .modal-scrim { position: absolute; inset: 0; z-index: 4; background: #080a0fcc; }
+    .drawer { position: absolute; z-index: 5; inset: 0 auto 0 0; width: min(84%, 330px); overflow: auto; padding: 40px 16px 20px; background: #202633; border-right: 1px solid #41495b; box-shadow: 16px 0 40px #0007; }
+    .drawer h2 { margin: 0; font-size: 21px; }
+    .drawer p { margin: 5px 0 20px; color: #aeb7c8; font-size: 11px; }
+    .group-label { margin: 16px 5px 6px; color: #9baeff; font-size: 9px; font-weight: 800; letter-spacing: .13em; }
+    .drawer-item { width: 100%; min-height: 55px; padding: 10px 12px; text-align: left; border: 1px solid #343c4e; border-radius: 13px; background: #252c3a; }
+    .drawer-item strong { display: block; font-size: 12px; }
+    .drawer-item small { display: block; margin-top: 3px; color: #aeb7c8; font-size: 10px; }
+    .modal-scrim { z-index: 8; display: grid; place-items: center; padding: 22px; }
+    .modal { width: min(100%, 340px); padding: 20px; border: 1px solid #41495b; border-radius: 22px; background: #202633; box-shadow: 0 20px 60px #0009; }
+    .modal h3 { margin: 0; font-size: 18px; }
+    .modal p { margin: 8px 0 15px; color: #aeb7c8; font-size: 12px; line-height: 1.5; }
+    .modal input { width: 100%; height: 48px; padding: 0 12px; border: 1px solid #485166; border-radius: 12px; background: #171b25; color: #f2f4fa; outline: none; }
+    .modal input:focus { border-color: #91a5ff; box-shadow: 0 0 0 3px #7891ff25; }
+    .modal-actions { display: flex; justify-content: end; gap: 8px; margin-top: 16px; }
+    .modal-actions button { min-height: 42px; padding: 0 13px; border: 1px solid #41495b; border-radius: 11px; background: #252c3a; font-size: 11px; font-weight: 700; }
+    .modal-actions .primary { border-color: #7188f1; background: #7891ff; color: #10131b; }
+    .modal-actions .danger { border-color: #a35155; background: #7d373b; color: white; }
+    .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 16px; }
+    .swatch { display: grid; place-items: center; width: 100%; aspect-ratio: 1; border: 2px solid #485166; border-radius: 15px; font-size: 21px; font-weight: 800; }
+    .bars { display: grid; gap: 12px; margin-top: 17px; }
+    .bar-head { display: flex; justify-content: space-between; color: #e9edf5; font-size: 12px; }
+    .track { height: 7px; margin-top: 6px; border-radius: 9px; background: #303747; overflow: hidden; }
+    .fill { height: 100%; width: var(--width); border-radius: inherit; background: var(--swatch); }
+    .result-card { margin-top: 15px; padding: 16px; border: 1px solid #333b4d; border-radius: 17px; background: #202633; }
+    [hidden] { display: none !important; }
+    @media (max-height: 700px) { .phone { height: calc(100vh - 24px); min-height: 600px; } body { padding: 12px; } }
+  </style>
+</head>
+<body>
+  <main class="phone" id="app">
+    <div class="status"><span>9:41</span><span>◉  ▰  ▴  82%</span></div>
+    <header>
+      <button class="menu" type="button" id="open-menu" aria-label="Abrir menu">☰</button>
+      <div class="brand"><strong>Finanças Conscientes</strong><small>Seu dinheiro, com contexto.</small></div>
+    </header>
+    <section class="body" id="screen" aria-live="polite"></section>
+    <nav class="bottom" aria-label="Navegação principal">
+      <button data-screen="home"><span>⌂</span>Início</button>
+      <button data-screen="results"><span>◔</span>Resultados</button>
+      <button data-screen="records"><span>≡</span>Registros</button>
+    </nav>
+    <div class="drawer-scrim" id="drawer-scrim" hidden></div>
+    <aside class="drawer" id="drawer" hidden>
+      <h2>Utilidades</h2><p>Ações e controles do aplicativo</p>
+      <div class="group-label">CAPTURA</div><button class="drawer-item"><strong>Novo registro manual</strong><small>Registrar um gasto com ou sem comprovante</small></button>
+      <div class="group-label">PLANEJAMENTO</div><button class="drawer-item"><strong>Orçamento mensal</strong><small>Definir ou remover seu limite</small></button>
+      <div class="group-label">PERSONALIZAÇÃO</div><button class="drawer-item" id="go-settings"><strong>Categorias e decisões</strong><small>Editar opções e cores exibidas nos resultados</small></button>
+      <div class="group-label">PRIVACIDADE</div><button class="drawer-item"><strong>Privacidade e funcionamento</strong><small>Dados ficam no aparelho</small></button>
+    </aside>
+    <div class="modal-scrim" id="modal-scrim" hidden><section class="modal" id="modal" role="dialog" aria-modal="true"></section></div>
+  </main>
+  <script>
+    (() => {
+      const palette = [
+        ["Coral", "#FF8A65"], ["Laranja", "#FFA726"], ["Âmbar", "#FFCA28"], ["Lima", "#9CCC65"],
+        ["Verde", "#66BB6A"], ["Turquesa", "#26A69A"], ["Ciano", "#26C6DA"], ["Azul", "#42A5F5"],
+        ["Índigo", "#5C6BC0"], ["Violeta", "#AB47BC"], ["Rosa", "#EC407A"], ["Cinza", "#90A4AE"]
+      ];
+      const categories = [
+        { name: "Outro", color: "#90A4AE", count: 0, fixed: true },
+        { name: "Alimentação", color: "#FF8A65", count: 12 },
+        { name: "Moradia", color: "#AB47BC", count: 3 },
+        { name: "Transporte", color: "#42A5F5", count: 8 },
+        { name: "Saúde", color: "#66BB6A", count: 1 },
+        { name: "Educação", color: "#5C6BC0", count: 1 },
+        { name: "Lazer", color: "#EC407A", count: 6 },
+        { name: "Bem-estar", color: "#9CCC65", count: 4 },
+        { name: "Compras", color: "#FFA726", count: 2 },
+        { name: "Assinaturas", color: "#26C6DA", count: 3 },
+        { name: "Dívidas", color: "#FFCA28", count: 0 },
+        { name: "Transferência", color: "#26A69A", count: 0 },
+        { name: "Sem categoria", color: "#90A4AE", count: 0, fixed: true }
+      ];
+      const decisions = [
+        { name: "Não informado", count: 4, fixed: true },
+        { name: "Planejado", count: 8 },
+        { name: "Impulso", count: 7 }
+      ];
+      const screen = document.querySelector("#screen");
+      const drawer = document.querySelector("#drawer");
+      const drawerScrim = document.querySelector("#drawer-scrim");
+      const modalScrim = document.querySelector("#modal-scrim");
+      const modal = document.querySelector("#modal");
+      let currentScreen = "settings";
+      const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[char]));
+      const quantity = (count, singular, plural) => `${count} ${count === 1 ? singular : plural}`;
+
+      function renderSettings() {
+        currentScreen = "settings";
+        screen.innerHTML = `
+          <p class="eyebrow">PERSONALIZAÇÃO</p><h1>Configurações</h1>
+          <p class="intro">Adapte categorias, cores e decisões ao seu jeito de acompanhar os gastos.</p>
+          <div class="info"><strong>Seus dados continuam no aparelho</strong><p>Opções e cores são salvas junto aos dados cifrados. Renomear preserva registros; remover informa quantos serão atualizados.</p></div>
+          <div class="section"><div><h2>Categorias</h2><p>As cores identificam cada grupo em Resultados.</p></div></div>
+          <button class="add" data-add="category">＋ &nbsp;Adicionar categoria</button>
+          ${categories.map((item, index) => `
+            <article class="option">
+              <div class="option-top"><span class="dot" style="--swatch:${item.color}"></span><span class="option-name"><strong>${escapeHtml(item.name)}</strong><small>${item.fixed ? "Opção protegida • " : ""}${quantity(item.count, "registro usando esta categoria", "registros usando esta categoria")}</small></span>${item.fixed ? '<span class="protected">FIXA</span>' : ""}</div>
+              <div class="actions"><button data-color="${index}" aria-label="Alterar cor de ${escapeHtml(item.name)}">Cor</button>${item.fixed ? "" : `<button data-edit-category="${index}">Editar</button><button class="remove" data-remove-category="${index}">Remover</button>`}</div>
+            </article>`).join("")}
+          <div class="section"><div><h2>Decisões</h2><p>Registre se o gasto foi planejado ou por impulso.</p></div></div>
+          <button class="add" data-add="decision">＋ &nbsp;Adicionar decisão</button>
+          ${decisions.map((item, index) => `
+            <article class="option decision"><div class="option-top"><span class="option-name"><strong>${escapeHtml(item.name)}</strong><small>${item.fixed ? "Opção protegida • " : ""}${quantity(item.count, "registro usando esta decisão", "registros usando esta decisão")}</small></span>${item.fixed ? '<span class="protected">FIXA</span>' : ""}</div>
+              <div class="actions">${item.fixed ? "" : `<button data-edit-decision="${index}">Editar</button><button class="remove" data-remove-decision="${index}">Remover</button>`}</div></article>`).join("")}
+          <p class="note">“Outro”, “Sem categoria” e “Não informado” permanecem disponíveis para manter os registros consistentes.</p>`;
+        document.querySelectorAll(".bottom [data-screen]").forEach(button => button.classList.toggle("active", button.dataset.screen === "settings"));
+      }
+
+      function renderResults() {
+        currentScreen = "results";
+        screen.innerHTML = `<p class="eyebrow">RESULTADOS</p><h1>Onde você gastou</h1><p class="intro">Outubro de 2026 • R$ 2.486,40 confirmados</p>
+          <section class="result-card"><div class="bars">${categories.filter(item => item.count > 0).slice(0, 6).map((item, index) => {
+            const amounts = [626, 405, 328, 220, 183, 94]; const amount = amounts[index] || 72;
+            return `<div><div class="bar-head"><span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${item.color};margin-right:7px"></span>${escapeHtml(item.name)}</span><strong>R$ ${amount}</strong></div><div class="track"><div class="fill" style="--width:${Math.max(8, amount / 7)}%;--swatch:${item.color}"></div></div></div>`;
+          }).join("")}</div></section>
+          <p class="note">As cores são escolhidas em Configurações → Categorias e decisões. Remover uma categoria transfere os registros para “Sem categoria”.</p>`;
+        document.querySelectorAll(".bottom [data-screen]").forEach(button => button.classList.toggle("active", button.dataset.screen === "results"));
+      }
+
+      function showNameModal(kind, index = null) {
+        const isCategory = kind === "category";
+        const list = isCategory ? categories : decisions;
+        const item = index === null ? null : list[index];
+        modal.innerHTML = `<h3>${item ? `Editar ${isCategory ? "categoria" : "decisão"}` : `Nova ${isCategory ? "categoria" : "decisão"}`}</h3><p>${item ? "O nome atualizado também será aplicado aos registros existentes." : "Dê um nome curto e fácil de reconhecer."}</p><input id="option-name" maxlength="36" value="${escapeHtml(item?.name || "")}" aria-label="Nome da opção"><div class="modal-actions"><button data-cancel>Cancelar</button><button class="primary" data-save>Salvar</button></div>`;
+        openModal();
+        const input = modal.querySelector("input"); input.focus();
+        modal.querySelector("[data-cancel]").onclick = closeModal;
+        modal.querySelector("[data-save]").onclick = () => {
+          const name = input.value.trim().replace(/\s+/g, " ");
+          const duplicate = list.some((other, i) => i !== index && other.name.toLocaleLowerCase("pt-BR") === name.toLocaleLowerCase("pt-BR"));
+          input.setCustomValidity("");
+          if (!name || duplicate) { input.setCustomValidity(!name ? "Informe um nome." : "Essa opção já existe."); input.reportValidity(); return; }
+          if (item) item.name = name;
+          else list.push({ name, count: 0, ...(isCategory ? { color: palette[categories.length % palette.length][1] } : {}) });
+          closeModal(); renderSettings();
+        };
+      }
+
+      function showColorModal(index) {
+        const item = categories[index];
+        modal.innerHTML = `<h3>Cor da categoria</h3><p>Selecione a cor que identifica <strong>${escapeHtml(item.name)}</strong> em Resultados.</p><div class="swatches">${palette.map(([name, color]) => `<button class="swatch" style="background:${color};color:${isLight(color) ? "#111" : "#fff"};" aria-label="${name}" data-pick="${color}">${item.color === color ? "✓" : ""}</button>`).join("")}</div><div class="modal-actions"><button data-cancel>Fechar</button></div>`;
+        openModal();
+        modal.querySelector("[data-cancel]").onclick = closeModal;
+        modal.querySelectorAll("[data-pick]").forEach(button => button.onclick = () => { item.color = button.dataset.pick; closeModal(); renderSettings(); });
+      }
+
+      function showDeleteModal(kind, index) {
+        const isCategory = kind === "category";
+        const list = isCategory ? categories : decisions;
+        const item = list[index];
+        const fallback = isCategory ? "Sem categoria" : "Não informado";
+        const affected = item.count || 0;
+        const copy = affected
+          ? `${quantity(affected, "registro está", "registros estão")} ligado${affected === 1 ? "" : "s"} a “${item.name}”. Se remover, ${affected === 1 ? "ele ficará" : "eles ficarão"} como “${fallback}”. Valores e comprovantes serão preservados.`
+          : `Nenhum registro usa “${item.name}”. A opção poderá ser adicionada novamente depois.`;
+        modal.innerHTML = `<h3>Remover ${isCategory ? "categoria" : "decisão"}?</h3><p>${copy}</p><p>Esta ação não pode ser desfeita.</p><div class="modal-actions"><button data-cancel>Cancelar</button><button class="danger" data-confirm>Remover</button></div>`;
+        openModal();
+        modal.querySelector("[data-cancel]").onclick = closeModal;
+        modal.querySelector("[data-confirm]").onclick = () => {
+          if (isCategory) {
+            const target = categories.find(entry => entry.name === fallback); if (target) target.count += affected;
+          } else {
+            const target = decisions.find(entry => entry.name === fallback); if (target) target.count += affected;
+          }
+          list.splice(index, 1); closeModal(); renderSettings();
+        };
+      }
+
+      function openModal() { modalScrim.hidden = false; }
+      function closeModal() { modalScrim.hidden = true; }
+      function isLight(hex) { const rgb = hex.slice(1).match(/.{2}/g).map(value => parseInt(value, 16)); return (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000 > 160; }
+      function openDrawer() { drawer.hidden = false; drawerScrim.hidden = false; }
+      function closeDrawer() { drawer.hidden = true; drawerScrim.hidden = true; }
+
+      document.querySelector("#open-menu").onclick = openDrawer;
+      drawerScrim.onclick = closeDrawer;
+      document.querySelector("#go-settings").onclick = () => { closeDrawer(); renderSettings(); };
+      document.querySelectorAll(".bottom [data-screen]").forEach(button => button.onclick = () => {
+        if (button.dataset.screen === "results") renderResults();
+        else if (button.dataset.screen === "home") { currentScreen = "home"; screen.innerHTML = `<p class="eyebrow">INÍCIO</p><h1>Acabou de gastar?</h1><p class="intro">Registre um gasto e acompanhe seus resultados.</p><div class="info"><strong>Confirme com o extrato</strong><p>CSV atualiza totais, categorias e pendências.</p></div>`; document.querySelectorAll(".bottom [data-screen]").forEach(item => item.classList.toggle("active", item.dataset.screen === "home")); }
+        else { currentScreen = "records"; screen.innerHTML = `<p class="eyebrow">REGISTROS</p><h1>Histórico classificado</h1><p class="intro">Comprovantes, registros manuais e itens confirmados.</p>`; document.querySelectorAll(".bottom [data-screen]").forEach(item => item.classList.toggle("active", item.dataset.screen === "records")); }
+      });
+      screen.addEventListener("click", event => {
+        const target = event.target.closest("button"); if (!target) return;
+        if (target.dataset.add) showNameModal(target.dataset.add);
+        else if (target.dataset.color !== undefined) showColorModal(Number(target.dataset.color));
+        else if (target.dataset.editCategory !== undefined) showNameModal("category", Number(target.dataset.editCategory));
+        else if (target.dataset.editDecision !== undefined) showNameModal("decision", Number(target.dataset.editDecision));
+        else if (target.dataset.removeCategory !== undefined) showDeleteModal("category", Number(target.dataset.removeCategory));
+        else if (target.dataset.removeDecision !== undefined) showDeleteModal("decision", Number(target.dataset.removeDecision));
+      });
+      modalScrim.addEventListener("click", event => { if (event.target === modalScrim) closeModal(); });
+      renderSettings();
+    })();
+  </script>
+</body>
+</html>

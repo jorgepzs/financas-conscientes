@@ -1,0 +1,29 @@
+<resources>
+    <color name="app_background">#F1F5F1</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="primary">#247A56</color>
+    <color name="primary_pressed">#1C6445</color>
+    <color name="primary_soft">#E7F4EC</color>
+    <color name="primary_soft_pressed">#D6ECDD</color>
+    <color name="text_primary">#17251D</color>
+    <color name="text_secondary">#59675F</color>
+    <color name="border">#E0E7E1</color>
+    <color name="success">#247A56</color>
+    <color name="success_soft">#E7F4EC</color>
+    <color name="warning">#8A5B0A</color>
+    <color name="warning_soft">#FFF4DD</color>
+    <color name="danger">#AF423C</color>
+    <color name="danger_soft">#FCE9E7</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_dashboard">#FFFFFF</color>
+    <color name="dashboard_secondary">#DCEFE3</color>
+    <color name="dashboard_overline">#D9EEE2</color>
+    <color name="dashboard_progress">#C5EFD5</color>
+    <color name="dashboard_track">#55FFFFFF</color>
+    <color name="dashboard_available">#FFFFFF</color>
+    <color name="dashboard_over_limit">#FFE1B1</color>
+    <color name="category_fallback">#90A4AE</color>
+    <color name="dashboard_start">#173D30</color>
+    <color name="dashboard_end">#256246</color>
+    <color name="capture_card_border">#C9E6D3</color>
+</resources>

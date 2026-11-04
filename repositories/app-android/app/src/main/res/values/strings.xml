@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Finanças Conscientes — Diagnóstico</string>
+    <string name="listener_label">Diagnóstico PicPay</string>
+    <string name="listener_description">Lê e armazena localmente apenas notificações do PicPay.</string>
+    <string name="open_notification_access">Abrir acesso a notificações</string>
+    <string name="clear_history">Apagar histórico</string>
+    <string name="encrypted_history_unreadable">O histórico criptografado não pôde ser lido.</string>
+</resources>
